@@ -1,38 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Yeon+Sung&display=swap');
+
+body {
+  background-color: #ececec;
+  font-family: 'Yeon Sung';
+}
+
 .App {
-  text-align: center;
+  margin:auto;
+  margin-top: 30px;
+  width: 650px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.react-calendar {
+  margin: auto;
+  width: 640px;
+  background: white;
+  border: 1px solid #a0a096;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.react-calendar--doubleView {
+  width: 700px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.react-calendar--doubleView .react-calendar__viewContainer {
   display: flex;
-  flex-direction: column;
+  margin: -0.5em;
+}
+.react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 50%;
+  margin: 0.5em;
+}
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.react-calendar button {
+  margin: 0;
+  margin-bottom: 3px;
+  border: 0;
+  outline: none;
+}
+.react-calendar button:enabled:hover {
+  cursor: pointer;
+}
+.react-calendar__navigation {
+  display: flex;
+  height: 44px;
+  margin-bottom: 1em;
+}
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+}
+.react-calendar__navigation button:disabled {
+  background-color: #f0f0f0;
+}
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #e6e6e6;
+}
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.5vw;
+}
+.react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+}
+.react-calendar__month-view__weekNumbers .react-calendar__tile {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 0.75em;
+  font-weight: bold;
+}
+.react-calendar__month-view__days__day--weekend {
+  color: #db4455;
+}
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #757575;
+}
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  padding: 2em 1em;
+}
+.react-calendar__tile {
+  max-width: 100%;
+  padding: 10px 6.6667px;
+  background: none;
+  text-align: center;
+  line-height: 16px;
+}
+.react-calendar__tile:disabled {
+  background-color: #f0f0f0;
+}
+.react-calendar__tile:enabled:hover{
+  background: #9bb8d5;
+  border-radius: 50px;
+  opacity: 0.5;
+}
+.react-calendar__tile:enabled:focus{
+  background-color: #9bb8d5;
+  border-radius: 50px;
+}
+.react-calendar__tile--now {
+  background: #64c964;
   color: white;
 }
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: #ffffa9;
+}
+.react-calendar__tile--hasActive {
+  background: #76baff;
+}
+.react-calendar__tile--hasActive:enabled:hover,
+.react-calendar__tile--hasActive:enabled:focus {
+  background: #9bb8d5;
+  border-radius: 50px;
 
-.App-link {
-  color: #61dafb;
+}
+.react-calendar__tile--active {
+  background: #9bb8d5;
+  border-radius: 50px;
+  color: white;
+}
+.react-calendar__tile--active:enabled:hover{
+  background: #9bb8d5;
+  opacity: 0.5;
+}
+.react-calendar__tile--active:enabled:focus {
+  background-color: #9bb8d5;
+}
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: #e6e6e6;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dots {
+  display: flex;
+  justify-content: center;
+}
+
+.dots .dot {
+  margin: 0;
+  margin-right: 3px;
+}
+.dots .dot_plus {
+  margin: 0;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  background-color: rgb(219, 68, 85);
+  border-radius: 50%;
+  display: flex;
+  margin: auto;
+}
+
+.dot_plus {
+  height: 8px;
+  width: 8px;
+  background-color: rgb(100, 201, 100);
+  border-radius: 50%;
+  display: flex;
+  margin: auto;
+}
+
+.head_color {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.head_color1 #circle1{
+  background-color: rgba(100, 201, 100, 0.5);
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 5px;
+}
+
+.head_color2 #circle2{
+  background-color: rgba(219, 68, 85, 0.5);
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 5px;
+}
+
+.head_color3 #circle3{
+  background-color: #9bb8d5;
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 5px;
+}
+
+/* Home */
+
+.show_date {
+  text-align: center;
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 2.5vw;
+  margin-top: 20px;
+}
+
+.show_content {
+  width: 50%;
+  margin: auto;
+  line-height: 1vw;
+  background-color: white;
+  text-align: center;
+  margin-top: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 17px;
+  font-family: 'Yeon Sung';
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border-radius: 8px;
+}
+
+.Home_btn {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+/* MyButton */
+
+.MyButton {
+  border: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 5px;
+  margin: 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: 'Yeon Sung';
+  cursor: pointer;
+}
+
+.MyButton_positive {
+  background-color: #9cc4ab;
+}
+
+.MyButton_negative {
+  background-color: #EA949D
+  ;
+}
+
+.MyButton_default {
+  background-color: #cce4c3;
+}
+
+/* New */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.New {
+  text-align: center;
+  margin: auto;
+  margin-top: 10px;
+  font-size: 20px;
+  font-family: 'Yeon Sung';
+  padding-bottom: 1px;
+}
+
+.New select {
+  width: 15%;
+  margin-left: 15px;
+  text-align: center;
+  font-family: 'Yeon Sung';
+  font-size: 20px;
+  border: none;
+  padding:10px;
+  border-radius: 8px;
+}
+
+.New input {
+  width: 50%;
+  text-align: center;
+  font-family: 'Yeon Sung';
+  font-size: 15px;
+  border: none;
+  padding:10px;
+  border-radius: 8px;
+}
+
+.New button{
+  width: 100px;
+}
+
+/* Edit */
+
+.Edit {
+  text-align: center;
+  margin: auto;
+  margin-top: 10px;
+  font-size: 20px;
+  font-family: 'Yeon Sung';
+  padding-bottom: 1px;
+}
+
+.Edit select {
+  width: 15%;
+  margin-left: 15px;
+  text-align: center;
+  font-family: 'Yeon Sung';
+  font-size: 20px;
+  border: none;
+  padding:10px;
+  border-radius: 8px;
+}
+
+.Edit input {
+  width: 50%;
+  text-align: center;
+  font-family: 'Yeon Sung';
+  font-size: 15px;
+  border: none;
+  padding:10px;
+  border-radius: 8px;
+}
+
+.Edit button {
+  width: 100px;
 }
