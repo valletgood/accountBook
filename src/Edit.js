@@ -22,6 +22,7 @@ const Edit = () => {
 
     const [payOption, setPayOption] = useState('');
 
+
     const handleEdit = () => {
         if (memo.length < 1) {
             memoRef.current.focus();
@@ -47,11 +48,27 @@ const Edit = () => {
     useEffect(() => {
         if (data) {
             const originData = data.filter((it) => it.dateid === date)
-            if (originData.length >= 1) {
+            if (originData.length >= 1 && originData.length < 2) {
                 setMemo(originData[0].memo)
                 setPay(originData[0].pay)
                 setPayOption(originData[0].payOption)
-            } else {
+            } else if (originData.length >= 2) {
+                const plusData = data.find((it) => it.dateid === date && it.payOption === 'plus')
+                const minusData = data.find((it) => it.dateid === date && it.payOption === 'minus')
+                console.log(plusData)
+                console.log(minusData)
+                console.log(payOption)
+                if (payOption === 'minus') {
+                    setMemo(minusData.memo)
+                    setPay(minusData.pay)
+                    setPayOption(minusData.payOption)
+                } else if (payOption === 'plus') {
+                    setMemo(plusData.memo)
+                    setPay(plusData.pay)
+                    setPayOption(plusData.payOption)
+                }
+            }
+            else {
                 if (window.confirm('이벤트가 없습니다. 새로 추가하시겠습니까?')) {
                     navigate('/New', { replace: true })
                 } else {
@@ -60,7 +77,7 @@ const Edit = () => {
                 }
             }
         }
-    }, [date])
+    }, [date, payOption])
 
 
     return (

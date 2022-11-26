@@ -33,7 +33,7 @@ const Home = () => {
             <div className='show_date'>{date}</div>
             {data.map((it) => it.dateid === date ?
                 <div className='show_content'>
-                    <p>{it.payOption === 'plus' ? '소득 : ' : '소비 : '} {it.memo} {it.pay + '원'}</p>
+                    <p>{it.payOption === 'plus' ? '소득 : ' : '소비 : '}{it.memo} <br />{it.pay + '원'}</p>
                 </div>
                 :
                 null)}
