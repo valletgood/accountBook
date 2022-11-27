@@ -1,16 +1,12 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
-import Calendar from 'react-calendar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-import moment from 'moment';
+import Calendar from 'react-calendar';
 import './App.css';
-
 import New from './New';
 import Home from './Home';
-
-import { dummy } from './util/dummy';
-import Setting from './Setting';
 import Edit from './Edit';
+import moment from 'moment';
+import { dummy } from './util/dummy';
 
 const reducer = (state, action) => {
   let newState = [];
@@ -23,7 +19,7 @@ const reducer = (state, action) => {
       break;
     }
     case 'REMOVE': {
-      newState = state.filter((it) => it.dateid !== action.targetDate);
+      newState = state.filter((it) => it.itemNo !== action.targetID);
       break;
     }
     case 'EDIT': {
@@ -76,9 +72,9 @@ function App() {
     })
   }
 
-  const onRemove = (itemNo) => {
+  const onRemove = (targetID) => {
     dispatch({
-      type: 'REMOVE', itemNo
+      type: 'REMOVE', targetID
     })
   }
 
@@ -143,7 +139,6 @@ function App() {
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/New' element={<New />} />
-                <Route path='/Setting' element={<Setting />} />
                 <Route path='/Edit/:itemNo' element={<Edit />} />
               </Routes>
             </div>

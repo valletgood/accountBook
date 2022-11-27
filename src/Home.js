@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { moneyDateContext, moneyDispatchContext, moneyStateContext } from './App';
 import { useNavigate } from 'react-router-dom'
 import MyButton from './util/MyButton';
@@ -9,37 +9,35 @@ const Home = () => {
 
     const date = useContext(moneyDateContext)
 
-    const { onRemove } = useContext(moneyDispatchContext)
+    const [money, setMoney] = useState()
 
     const navigate = useNavigate()
 
-    const handleRemove = () => {
-        const handleItem = data.filter((it) => it.dateid === date)
-        if (handleItem.length >= 1) {
-            if (window.confirm(`정말 ${date}의 기록을 삭제하시겠습니까?`)) {
-                onRemove(date)
-            }
-        } else {
-            alert('존재하는 기록이 없습니다.')
+    useEffect(() => {
+        let account = 0;
+        const plusMoney = data.filter((it) => it.payOption === 'plus')
+        const minusMoney = data.filter((it) => it.payOption === 'minus')
+        for (let i = 0; i < plusMoney.length; i++) {
+            account = account + parseInt(plusMoney[i].pay)
         }
-    }
-
-    console.log(data)
-    console.log(date)
+        for (let i = 0; i < minusMoney.length; i++) {
+            account = account - parseInt(minusMoney[i].pay)
+        }
+        setMoney(account)
+    }, [data])
 
     return (
         <div className='Home'>
-            <div className='show_date'>
-                <MyButton text={'설정'} onClick={() => navigate('/Setting')} />
-                {date}
+            <div className='show_title'>
                 <MyButton text={'추가하기'} type={'positive'} onClick={() => navigate('/New')} />
+                <span>{date}</span>
+                <span> 잔액 : {money}원</span>
             </div>
             <div className='show_box'>
                 {data.map((it) => it.dateid === date ?
                     <div className='show_content'>
                         <p>{it.payOption === 'plus' ? '소득 : ' : '소비 : '}{it.memo} <br />{it.pay + '원'}</p>
                         <MyButton text={'수정하기'} onClick={() => navigate(`/Edit/${it.itemNo}`)} />
-                        <MyButton text={'삭제하기'} type={'negative'} onClick={handleRemove} />
                     </div>
                     :
                     null)}

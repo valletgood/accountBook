@@ -8,7 +8,7 @@ const Edit = () => {
 
     const date = useContext(moneyDateContext)
 
-    const { onEdit } = useContext(moneyDispatchContext)
+    const { onEdit, onRemove } = useContext(moneyDispatchContext)
 
     const navigate = useNavigate()
 
@@ -25,11 +25,9 @@ const Edit = () => {
     const [targetID, setTargetID] = useState();
 
     const { itemNo } = useParams();
-    console.log(itemNo)
-
 
     const handleEdit = () => {
-        const originData = data.filter((it) => it.dateid === date)
+
         if (memo.length < 1) {
             memoRef.current.focus();
             return;
@@ -39,6 +37,13 @@ const Edit = () => {
         } else {
             onEdit(targetID, pay, memo, payOption)
             alert('수정이 완료되었습니다.')
+        }
+        navigate('/', { replace: true })
+    }
+
+    const handleRemove = () => {
+        if (window.confirm('정말 기록을 삭제하시겠습니까?')) {
+            onRemove(targetID)
         }
         navigate('/', { replace: true })
     }
@@ -62,7 +67,6 @@ const Edit = () => {
         }
     }, [itemNo, data])
 
-
     return (
         <div className='Edit'>
             <p>{date}의 기록 수정
@@ -80,6 +84,8 @@ const Edit = () => {
             </p>
             <MyButton text={'뒤로가기'} onClick={() => navigate(-1)} />
             <MyButton text={'수정하기'} type={'positive'} onClick={handleEdit} />
+            <MyButton text={'삭제하기'} type={'negative'} onClick={handleRemove} />
+
         </div>
     )
 }
