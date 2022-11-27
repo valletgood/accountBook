@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import Calendar from 'react-calendar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -27,7 +27,7 @@ const reducer = (state, action) => {
       break;
     }
     case 'EDIT': {
-      newState = state.map((it) => it.dateid === action.data.dateid ? { ...action.data } : it);
+      newState = state.map((it) => it.itemNo === action.data.itemNo ? { ...action.data } : it);
       break;
     }
     default:
@@ -49,13 +49,25 @@ function App() {
 
   const [date, setDate] = useState(moment(value).format('YYYY년 MM월 DD일'));
 
-  const [dotDate, setDotDate] = useState()
-
-  // const [itemList, setItemList] = useState([])
+  const dataID = useRef(8)
 
   const onCreate = (date, pay, memo, payOption) => {
     dispatch({
       type: 'CREATE', data: {
+        itemNo: dataID.current,
+        dateid: date,
+        pay,
+        memo,
+        payOption
+      }
+    })
+    dataID.current += 1;
+  }
+
+  const onEdit = (targetID, pay, memo, payOption) => {
+    dispatch({
+      type: 'EDIT', data: {
+        itemNo: targetID,
         dateid: date,
         pay,
         memo,
@@ -64,20 +76,9 @@ function App() {
     })
   }
 
-  const onEdit = (targetDate, pay, memo, payOption) => {
+  const onRemove = (itemNo) => {
     dispatch({
-      type: 'EDIT', data: {
-        dateid: targetDate,
-        pay,
-        memo,
-        payOption
-      }
-    })
-  }
-
-  const onRemove = (targetDate) => {
-    dispatch({
-      type: 'REMOVE', targetDate
+      type: 'REMOVE', itemNo
     })
   }
 

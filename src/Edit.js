@@ -22,8 +22,11 @@ const Edit = () => {
 
     const [payOption, setPayOption] = useState('');
 
+    const [targetID, setTargetID] = useState();
+
 
     const handleEdit = () => {
+        const originData = data.filter((it) => it.dateid === date)
         if (memo.length < 1) {
             memoRef.current.focus();
             return;
@@ -31,17 +34,10 @@ const Edit = () => {
             payRef.current.focus();
             return;
         } else {
-            if (pay.type == String) {
-                const regex = /[^0-9]/g;
-                const result = pay.replace(regex, "");
-                const changePay = parseInt(result);
-                onEdit(date, changePay, memo, payOption)
-                alert('수정이 완료되었습니다.')
-            } else {
-                onEdit(date, pay, memo, payOption)
-                alert('수정이 완료되었습니다.')
-            }
+            onEdit(targetID, pay, memo, payOption)
+            alert('수정이 완료되었습니다.')
         }
+
         navigate('/', { replace: true })
     }
 
@@ -52,20 +48,20 @@ const Edit = () => {
                 setMemo(originData[0].memo)
                 setPay(originData[0].pay)
                 setPayOption(originData[0].payOption)
+                setTargetID(originData[0].itemNo)
             } else if (originData.length >= 2) {
                 const plusData = data.find((it) => it.dateid === date && it.payOption === 'plus')
                 const minusData = data.find((it) => it.dateid === date && it.payOption === 'minus')
-                console.log(plusData)
-                console.log(minusData)
-                console.log(payOption)
                 if (payOption === 'minus') {
                     setMemo(minusData.memo)
                     setPay(minusData.pay)
                     setPayOption(minusData.payOption)
+                    setTargetID(minusData.itemNo)
                 } else if (payOption === 'plus') {
                     setMemo(plusData.memo)
                     setPay(plusData.pay)
                     setPayOption(plusData.payOption)
+                    setTargetID(plusData.itemNo)
                 }
             }
             else {

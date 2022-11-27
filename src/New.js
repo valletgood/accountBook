@@ -28,10 +28,7 @@ const New = () => {
             payRef.current.focus();
             return;
         } else {
-            const regex = /[^0-9]/g;
-            const result = pay.replace(regex, "");
-            const changePay = parseInt(result);
-            onCreate(date, changePay, memo, payOption)
+            onCreate(date, pay, memo, payOption)
             alert('저장이 완료되었습니다.')
         }
         navigate('/', { replace: true })
@@ -49,7 +46,7 @@ const New = () => {
                 <input ref={memoRef} type='text' value={memo} onChange={(e) => setMemo(e.target.value)} placeholder='메모를 입력해주세요!' />
             </p>
             <p>
-                <input ref={payRef} type='text' value={pay} onChange={(e) => setPay(e.target.value)} placeholder='금액을 입력해주세요!' />
+                <input ref={payRef} type='number' value={pay} onChange={(e) => setPay(parseInt(e.target.value))} placeholder='금액을 입력해주세요!' />
             </p>
             <MyButton text={'뒤로가기'} onClick={() => navigate(-1)} />
             <MyButton text={'추가하기'} type={'positive'} onClick={handleCreate} />
