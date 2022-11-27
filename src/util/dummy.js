@@ -32,7 +32,7 @@ export const dummy = [
         dateid: '2022년 11월 25일',
         pay: 150000,
         memo: '외식',
-        payOption: 'minus'
+        payOption: 'plus'
     },
     {
         itemNo: 6,

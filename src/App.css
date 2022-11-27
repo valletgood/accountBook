@@ -211,16 +211,18 @@ body {
 /* Home */
 
 .show_date {
-  text-align: center;
   font-family: 'Nanum Pen Script', cursive;
   font-size: 2.5vw;
   margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  align-items: center;
 }
 
 .show_content {
-  width: 50%;
+  width: 45%;
   margin: auto;
-
   background-color: white;
   text-align: center;
   margin-top: 20px;
@@ -232,10 +234,15 @@ body {
   border-radius: 8px;
 }
 
-.Home_btn {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+.show_content .MyButton{
+  width: 30%;
+}
+
+.show_box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 /* MyButton */

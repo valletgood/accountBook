@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect, useRef } from 'react';
 import { moneyDateContext, moneyDispatchContext, moneyStateContext } from './App';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import MyButton from './util/MyButton';
 
 const Edit = () => {
@@ -24,6 +24,9 @@ const Edit = () => {
 
     const [targetID, setTargetID] = useState();
 
+    const { itemNo } = useParams();
+    console.log(itemNo)
+
 
     const handleEdit = () => {
         const originData = data.filter((it) => it.dateid === date)
@@ -37,34 +40,18 @@ const Edit = () => {
             onEdit(targetID, pay, memo, payOption)
             alert('수정이 완료되었습니다.')
         }
-
         navigate('/', { replace: true })
     }
 
     useEffect(() => {
-        if (data) {
-            const originData = data.filter((it) => it.dateid === date)
-            if (originData.length >= 1 && originData.length < 2) {
-                setMemo(originData[0].memo)
-                setPay(originData[0].pay)
-                setPayOption(originData[0].payOption)
-                setTargetID(originData[0].itemNo)
-            } else if (originData.length >= 2) {
-                const plusData = data.find((it) => it.dateid === date && it.payOption === 'plus')
-                const minusData = data.find((it) => it.dateid === date && it.payOption === 'minus')
-                if (payOption === 'minus') {
-                    setMemo(minusData.memo)
-                    setPay(minusData.pay)
-                    setPayOption(minusData.payOption)
-                    setTargetID(minusData.itemNo)
-                } else if (payOption === 'plus') {
-                    setMemo(plusData.memo)
-                    setPay(plusData.pay)
-                    setPayOption(plusData.payOption)
-                    setTargetID(plusData.itemNo)
-                }
-            }
-            else {
+        if (data.length >= 1) {
+            const targetData = data.find((it) => parseInt(it.itemNo) === parseInt(itemNo))
+            if (targetData) {
+                setMemo(targetData.memo)
+                setPay(targetData.pay)
+                setPayOption(targetData.payOption)
+                setTargetID(targetData.itemNo)
+            } else {
                 if (window.confirm('이벤트가 없습니다. 새로 추가하시겠습니까?')) {
                     navigate('/New', { replace: true })
                 } else {
@@ -73,7 +60,7 @@ const Edit = () => {
                 }
             }
         }
-    }, [date, payOption])
+    }, [itemNo, data])
 
 
     return (

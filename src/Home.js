@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { moneyDateContext, moneyDispatchContext, moneyStateContext } from './App';
 import { useNavigate } from 'react-router-dom'
 import MyButton from './util/MyButton';
@@ -29,19 +29,20 @@ const Home = () => {
 
     return (
         <div className='Home'>
-
-            <div className='show_date'>{date}</div>
-            {data.map((it) => it.dateid === date ?
-                <div className='show_content'>
-                    <p>{it.payOption === 'plus' ? '소득 : ' : '소비 : '}{it.memo} <br />{it.pay + '원'}</p>
-                </div>
-                :
-                null)}
-            <div className='Home_btn'>
-                <MyButton text={'삭제하기'} type={'negative'} onClick={handleRemove} />
+            <div className='show_date'>
                 <MyButton text={'설정'} onClick={() => navigate('/Setting')} />
-                <MyButton text={'수정하기'} onClick={() => navigate('/Edit')} />
+                {date}
                 <MyButton text={'추가하기'} type={'positive'} onClick={() => navigate('/New')} />
+            </div>
+            <div className='show_box'>
+                {data.map((it) => it.dateid === date ?
+                    <div className='show_content'>
+                        <p>{it.payOption === 'plus' ? '소득 : ' : '소비 : '}{it.memo} <br />{it.pay + '원'}</p>
+                        <MyButton text={'수정하기'} onClick={() => navigate(`/Edit/${it.itemNo}`)} />
+                        <MyButton text={'삭제하기'} type={'negative'} onClick={handleRemove} />
+                    </div>
+                    :
+                    null)}
             </div>
         </div>
     )

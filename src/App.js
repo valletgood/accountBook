@@ -111,11 +111,27 @@ function App() {
                 onChange={(value, event) => setDate(moment(value).format('YYYY년 MM월 DD일'))}
                 tileContent={({ date, view }) => {
                   const selectDate = data.filter((it) => it.dateid === moment(date).format("YYYY년 MM월 DD일"))
+
+                  //!--- 해당 날짜의 기록이 2개 이상인 경우 dotNo 카운트를 이용해 그 날에 소비와 소득이 같이 기록되면 각각의 원을, 
+                  // 같은 옵션이면 하나의 원만 나오도록 설정
                   if (selectDate.length >= 2) {
-                    return (<div className='dots'>
-                      <div className='dot'></div>
-                      <div className='dot_plus'></div>
-                    </div>)
+                    let dotNo = 0;
+                    for (let i = 0; i < selectDate.length; i++) {
+                      if (selectDate[i].payOption === 'plus') {
+                        dotNo += 1;
+                      }
+                    }
+                    if (dotNo === 0) {
+                      return (<div className='dot'></div>)
+                    } else if (dotNo === selectDate.length) {
+                      return (<div className='dot_plus'></div>)
+                    } else {
+                      return (<div className='dots'>
+                        <div className='dot'></div>
+                        <div className='dot_plus'></div>
+                      </div>)
+                    }
+                    //아래는 기록이 한개씩만 있을 때 옵션을 비교해 해당하는 원을 출력
                   } else if (data.find((it) => it.dateid === moment(date).format("YYYY년 MM월 DD일") && it.payOption === 'minus')) {
                     return (<div className='dot'></div>)
                   } else if (data.find((it) => it.dateid === moment(date).format("YYYY년 MM월 DD일") && it.payOption === 'plus')) {
@@ -128,7 +144,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/New' element={<New />} />
                 <Route path='/Setting' element={<Setting />} />
-                <Route path='/Edit' element={<Edit />} />
+                <Route path='/Edit/:itemNo' element={<Edit />} />
               </Routes>
             </div>
           </BrowserRouter>
