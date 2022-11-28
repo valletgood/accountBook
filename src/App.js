@@ -6,7 +6,6 @@ import New from './New';
 import Home from './Home';
 import Edit from './Edit';
 import moment from 'moment';
-import { dummy } from './util/dummy';
 
 const reducer = (state, action) => {
   let newState = [];
@@ -29,9 +28,9 @@ const reducer = (state, action) => {
     default:
       return state;
   }
+  localStorage.setItem('money', JSON.stringify(newState))
   return newState
 }
-
 
 export const moneyStateContext = React.createContext();
 export const moneyDateContext = React.createContext();
@@ -45,7 +44,7 @@ function App() {
 
   const [date, setDate] = useState(moment(value).format('YYYY년 MM월 DD일'));
 
-  const dataID = useRef(8)
+  const dataID = useRef(0)
 
   const onCreate = (date, pay, memo, payOption) => {
     dispatch({
@@ -80,10 +79,16 @@ function App() {
 
   useEffect(() => {
 
-    dispatch({ type: 'INIT', data: dummy })
+    const localData = localStorage.getItem('money');
+    if (localData) {
+      const moneyList = JSON.parse(localData).sort((a, b) => parseInt(b.itemNo) - parseInt(a.itemNo))
+      if (moneyList.length >= 1) {
+        dataID.current = parseInt(moneyList[0].id + 1)
+        dispatch({ type: "INIT", data: moneyList })
+      }
+    }
 
   }, [])
-
   return (
     <moneyStateContext.Provider value={data}>
       <moneyDateContext.Provider value={date}>
