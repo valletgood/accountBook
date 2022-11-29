@@ -82,10 +82,11 @@ const Edit = () => {
             <p>
                 <input ref={payRef} type='number' value={pay} onChange={(e) => setPay(e.target.value)} />
             </p>
-            <MyButton text={'뒤로가기'} onClick={() => navigate(-1)} />
-            <MyButton text={'수정하기'} type={'positive'} onClick={handleEdit} />
-            <MyButton text={'삭제하기'} type={'negative'} onClick={handleRemove} />
-
+            <p className='footer_btn'>
+                <MyButton text={'뒤로가기'} onClick={() => navigate(-1)} />
+                <MyButton text={'수정하기'} type={'positive'} onClick={handleEdit} />
+                <MyButton text={'삭제하기'} type={'negative'} onClick={handleRemove} />
+            </p>
         </div>
     )
 }

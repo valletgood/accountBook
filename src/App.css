@@ -5,27 +5,15 @@ body {
   font-family: 'Yeon Sung';
 }
 
-@media (max-width:580px){
-  .App{
-    width: 570px;
-  }
-}
-
-@media (min-width:580px){
-  .App{
-    width: 650px;
-  }
-}
-
 .App {
   margin:auto;
   margin-top: 15px;
   width: 650px;
+  padding: 10px;
 }
 
 .react-calendar {
   margin: auto;
-  width: 640px;
   background: white;
   border: 1px solid #a0a096;
   font-family: Arial, Helvetica, sans-serif;
@@ -83,7 +71,7 @@ body {
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 1.5vw;
+  font-size: 15px;
 }
 .react-calendar__month-view__weekdays__weekday {
   padding: 0.5em;
@@ -226,7 +214,7 @@ body {
 
 .show_title {
   font-family: 'Nanum Pen Script', cursive;
-  font-size: 2vw;
+  font-size: 20px;
   margin-top: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -244,7 +232,7 @@ body {
 
 .show_title button{
   font-family: 'Nanum Pen Script', cursive;
-  font-size: 2vw;
+  font-size: 20px;
 }
 
 .show_content {
@@ -254,7 +242,7 @@ body {
   text-align: center;
   margin-top: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-size: 17px;
+  font-size: 20px;
   font-family: 'Yeon Sung';
   padding-top: 1px;
   padding-bottom: 1px;
@@ -327,6 +315,7 @@ input[type='number'] {
   border: none;
   padding:10px;
   border-radius: 8px;
+  background-color: white;
 }
 
 .New input {
@@ -363,6 +352,7 @@ input[type='number'] {
   border: none;
   padding:10px;
   border-radius: 8px;
+  background-color: white;
 }
 
 .Edit input {
@@ -377,4 +367,71 @@ input[type='number'] {
 
 .Edit button {
   width: 100px;
+}
+
+@media  (max-width:750px){
+  .App{
+    width: 700px
+  }
+  .react-calendar{
+    width: 100%;
+  }
+  .head_color{
+    width: 100%;
+    margin: auto;
+    margin-bottom: 2px;
+  }.show_content{
+    font-size: 15px;
+  }.MyButton{
+    font-size: 15px;
+    padding: 5px;
+  }.show_title button{
+    font-size: 15px;
+  }.show_title span{
+    font-size: 15px;
+  }.Edit select {
+    font-size: 15px;
+  }
+}
+
+@media (max-width:400px){
+  .App{
+    width: 350px
+  }
+  .react-calendar{
+    width: 100%;
+  }
+  .head_color{
+    width: 100%;
+    margin: auto;
+    margin-bottom: 2px;
+  }
+  .show_content{
+    font-size: 15px;
+  }
+  .show_content .MyButton{
+    width: 40%;
+  }
+  .MyButton{
+    font-size: 15px;
+    padding: 5px;
+  }
+  .show_title button{
+    font-size: 15px;
+  }
+  .show_title span{
+    font-size: 15px;
+  }
+  .Edit select {
+    width: 20%;
+    font-size: 15px;
+  }
+  .Edit .footer_btn{
+    display: flex;
+    justify-content: space-around;
+  }
+  .New select{
+    width: 20%;
+    font-size: 15px ;
+  }
 }

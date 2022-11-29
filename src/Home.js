@@ -50,7 +50,7 @@ const Home = () => {
             <div className='show_title'>
                 <MyButton text={'추가하기'} type={'positive'} onClick={() => navigate('/New')} />
                 <span>{date}</span>
-                <span> 이번 달 : {money}원</span>
+                <span>잔액 : {money}원</span>
             </div>
             <div className='show_box'>
                 {data.map((it) => it.dateid === date ?
