@@ -1,3 +1,6 @@
+# 프로젝트 소개
+달력을 이용해 소비와 소득이 생긴 날은 표시하고 각각 어떤 내용인지 간단하게 기록할 수 있으며 소득과 소비에 대한 내용을 바탕으로 잔액을 표시하는 기능을 만들었습니다.
+
 # Page URL
 https://valletgood-accountbook.firebaseapp.com/
 
